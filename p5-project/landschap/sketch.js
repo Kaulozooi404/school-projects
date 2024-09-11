@@ -140,6 +140,16 @@ function draw() {
 
 let currentLight = 2;
 
+function keyPressed() {
+  if(currentLight === -1) {
+    currentLight = 3 
+    keyPressed()
+  } else 
+  if (keyCode === ENTER) {
+    currentLight = (currentLight - 1) % 3;
+    // alert(currentLight)
+  }}
+
 function animateObjects() {
   // Animatie wolken
   objectsX.cloud.objects.obj1 += objectsX.cloud.speed;
