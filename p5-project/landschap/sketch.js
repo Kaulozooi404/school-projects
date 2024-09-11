@@ -1,8 +1,6 @@
-let dayColor = '#add8e6'; 
-let nightColor = '#2c3e50'; 
-let transitionSpeed = 10; 
+let dayColor, nightColor, sunStartColor, sunEndColor
+let transitionDuration = 20;
 let t = 0;
-
 let objectsX = { 
   cloud: { 
     objects: { 
@@ -15,9 +13,9 @@ let objectsX = {
 
   sun: { 
     objects: { 
-      obj1: 1800,
+      obj1: 100,
     },
-    speed: 0.25,
+    speed: 3.67,
   },
 
   car: { 
@@ -35,18 +33,34 @@ let objectsX = {
 
 function setup() {
   createCanvas(2000, 1000);
+   dayColor = color('#add8e6');
+   nightColor = color('#2c3e50');
+   sunStartColor = color('#a0a5ad');
+   sunEndColor = color('#FFFF66');  
+   incrementPerFrame = 1 / (60 * transitionDuration); // 60 Frames x 15s
+   
+   currentTime = lerpColor(dayColor, nightColor, t);
+   alert('Zoom to %80')
 }
 
 function draw() {
+  let cycleSpeed = TWO_PI / (60 * transitionDuration);  // TWO_PI is a predefined constant for full circle in radians.
+  let currentTime = lerpColor(dayColor, nightColor, t);
+  let sunXPos = objectsX.sun.objects.obj1; 
+  let lerpFactor = map(sunXPos, 0, width, 0, 1); // Maps sun position from 0 (left) to 1 (right)
+  let sunCurrentColor = lerpColor(sunEndColor, sunStartColor, lerpFactor); // Interpolate color
+
+  t = (sin(frameCount * cycleSpeed) + 1) / 2; 
+  background(currentTime);
+
+  // Draw the sun
   noStroke();
+  fill(sunCurrentColor);
+  circle(objectsX.sun.objects.obj1, 100, 140);
 
-
+  noStroke();
   // Animatie
   animateObjects();
-
-  // Zon
-  fill('#FFFF66');
-  circle(objectsX.sun.objects.obj1, 100, 140);
 
   // Wolk
   fill('#FFFFF');
@@ -88,25 +102,22 @@ function draw() {
   // Stoplicht
   fill(80);
 
-
   // Traffic light frame
   noStroke();
- fill(80);
- rect(1795, 600, 20, 400);
+  fill(80);
+  rect(1795, 600, 20, 400);
 
- fill(50); 
- rect(1765, 600, 80, 240);
+  fill(50); 
+  rect(1765, 600, 80, 240);
 
- fill(currentLight === 0 ? 'red' : 'darkred');
- circle(1805, 640, 60);
+  fill(currentLight === 0 ? 'red' : 'darkred');
+  circle(1805, 640, 60);
 
- fill(currentLight === 1 ? 'orange' : '#663300');
- circle(1805, 715, 60);
+  fill(currentLight === 1 ? 'orange' : '#663300');
+  circle(1805, 715, 60);
 
- fill(currentLight === 2 ? 'green' : 'darkgreen');
- circle(1805, 790, 60);
-
-
+  fill(currentLight === 2 ? 'green' : 'darkgreen');
+  circle(1805, 790, 60);
 
   // Auto
   noStroke();
@@ -126,24 +137,10 @@ function draw() {
   rect(objectsX.car.objects.obj6, 850, 90, 45);
 }
 
+
 let currentLight = 2;
 
-function keyPressed() {
-  if (keyCode === ENTER) {
-    currentLight = (currentLight - 1) % 3;
-    if(currentLight < 0) { 
-      currentLight = 2
-    }
-  }
-}
-
-
 function animateObjects() {
-  t += transitionSpeed;
-  if (t > 1) t = 0; 
-  let currentColor = lerpColor(color(dayColor), color(nightColor), t);
-  background(currentColor);
-
   // Animatie wolken
   objectsX.cloud.objects.obj1 += objectsX.cloud.speed;
   objectsX.cloud.objects.obj2 += objectsX.cloud.speed;
@@ -208,3 +205,4 @@ function animateObjects() {
     objectsX.car.objects.obj6 = -100;
   };
 };
+
