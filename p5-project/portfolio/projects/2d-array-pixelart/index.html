@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>p5.js Project Gallery</title>
+  
+  <!-- Link to local CSS file -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Load p5.js libraries locally -->
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+</head>
+<body>
+  <h1>p5.js Project Gallery</h1>
+
+  <!-- Buttons to load different sketches -->
+  <button onclick="loadSketch('2d-array-pixelart/sketch.js')">2D Array Pixelart</button>
+  <button onclick="loadSketch('array-excercise/sketch.js')">Array Exercise</button>
+  <button onclick="loadSketch('bingokaart/sketch.js')">Bingokaart</button>
+  <button onclick="loadSketch('boter-kaas-eieren/sketch.js')">Boter Kaas Eieren</button>
+  <button onclick="loadSketch('dier/sketch.js')">Dier</button>
+  <button onclick="loadSketch('flocking-simulatie/sketch.js')">Flocking Simulatie</button>
+  <button onclick="loadSketch('landschap/sketch.js')">Landschap</button>
+  <button onclick="loadSketch('quiz/sketch.js')">Quiz</button>
+
+  <!-- Container for p5.js canvas -->
+  <div id="canvas-container"></div>
+
+  <!-- Link to the script for loading sketches -->
+  <script src="script.js"></script>
+</body>
+</html>

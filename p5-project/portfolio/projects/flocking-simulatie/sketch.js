@@ -1,11 +1,9 @@
 // Array to hold all the boids (birds)
 let boids = [];
-let customInput 
-
 
 function setup() {
-  createCanvas(2560, 1440);  // Create a canvas of 600x400 pixels
-  for (let i = 0; i < 200; i++) {
+  createCanvas(1000, 500);  // Create a canvas of 600x400 pixels
+  for (let i = 0; i < 2000; i++) {
     boids.push(new Boid());  // Create 100 boids
   }
 }
@@ -133,5 +131,3 @@ class Boid {
     return steering;
   }
 }
-
-function timeout(){}

@@ -1,0 +1,18 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+
+ellipse { 
+ display: padding; 
+ width: min-content;
+ contain-intrinsic-height: -20vh;
+
+right:  20px;
+
+}
